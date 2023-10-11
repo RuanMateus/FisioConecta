@@ -10,7 +10,6 @@ class NavigacaoBar extends StatelessWidget {
       unselectedItemColor: const Color(0xFF4CAF50),
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          // activeIcon: HomePage(),
           icon: Icon(Icons.home),
           label: 'Home',
         ),

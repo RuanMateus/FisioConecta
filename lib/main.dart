@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application/pages/home_page.dart';
+import 'pages/createAccount_page.dart';
+import 'pages/home_page.dart';
 import 'package:flutter_application/pages/login_page.dart';
 import 'package:go_router/go_router.dart';
-import 'pages/createAccount_page.dart';
-import 'pages/registerPacients_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +13,19 @@ final GoRouter _router = GoRouter(routes: <RouteBase>[
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
         return const LoginPage();
-      })
+      },
+      routes: <RouteBase>[
+        GoRoute(
+            path: 'createAccount',
+            builder: (BuildContext context, GoRouterState state) {
+              return const CreateAccountPage();
+            }),
+        GoRoute(
+            path: 'home',
+            builder: (BuildContext context, GoRouterState state) {
+              return const HomePage();
+            }),
+      ])
 ]);
 
 class MyApp extends StatelessWidget {

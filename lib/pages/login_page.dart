@@ -125,7 +125,7 @@ class _LoginPageState extends State<LoginPage> {
                     width: double.maxFinite,
                     height: 52,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () => context.go('/home'),
                       style: ElevatedButton.styleFrom(
                           backgroundColor: AppNotificaColors.greenApp,
                           elevation: 3,
