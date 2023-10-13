@@ -25,6 +25,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
         Container(
             padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 0),
             child: const Text('Crie sua conta aqui')),
+        
         Form(
             child: Column(
           children: [
@@ -43,7 +44,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
               decoration: InputDecoration(
                   label: const Text(
                     'Email:',
-                    style: TextStyle(color: Colors.black87),
+                    style: TextStyle(color: Color.fromARGB(221, 29, 150, 58)),
                   ),
                   filled: true,
                   border: OutlineInputBorder(
