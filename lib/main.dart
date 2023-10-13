@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'pages/createAccount_page.dart';
 import 'pages/home_page.dart';
+import 'pages/paciente_page.dart';
+import 'pages/exercicios_page.dart';
+import 'pages/historico_page.dart';
 import 'package:flutter_application/pages/login_page.dart';
 import 'package:go_router/go_router.dart';
 
@@ -24,6 +27,21 @@ final GoRouter _router = GoRouter(routes: <RouteBase>[
             path: 'home',
             builder: (BuildContext context, GoRouterState state) {
               return const HomePage();
+            }),
+        GoRoute(
+            path: 'pacientes',
+            builder: (BuildContext context, GoRouterState state) {
+              return const PacientePage();
+            }),
+        GoRoute(
+            path: 'exercicios',
+            builder: (BuildContext context, GoRouterState state) {
+              return const ExerciciosPage();
+            }),
+        GoRoute(
+            path: 'historico',
+            builder: (BuildContext context, GoRouterState state) {
+              return const HistoricoPage();
             }),
       ])
 ]);
