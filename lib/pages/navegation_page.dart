@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class NavigacaoBar extends StatelessWidget {
   const NavigacaoBar({Key? key}) : super(key: key);
@@ -10,12 +11,10 @@ class NavigacaoBar extends StatelessWidget {
       unselectedItemColor: const Color(0xFF4CAF50),
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          // activeIcon: HomePage(),
           icon: Icon(Icons.home),
           label: 'Home',
         ),
         BottomNavigationBarItem(
-          // activeIcon: PacientePage(),
           icon: Icon(Icons.people),
           label: 'Pacientes',
         ),
@@ -28,6 +27,24 @@ class NavigacaoBar extends StatelessWidget {
           label: 'Historico',
         ),
       ],
+      onTap: (int index) {
+        switch (index) {
+          case 0:
+            context.go('/home');
+            break;
+          case 1:
+            context.go('/pacientes');
+            break;
+          case 2:
+            context.go('/exercicios');
+            break;
+          case 3:
+            context.go('/historico');
+            break;
+          default:
+            break;
+        }
+      },
     );
   }
 }
