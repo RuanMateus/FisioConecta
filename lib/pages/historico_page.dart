@@ -12,8 +12,8 @@ class _HistoricoPageState extends State<HistoricoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(automaticallyImplyLeading: false,
-        title: const Text('Historico')),
+        appBar: AppBar(
+            automaticallyImplyLeading: false, title: const Text('Historico')),
         body: ListView(
           children: const <Widget>[
             ListTile(
