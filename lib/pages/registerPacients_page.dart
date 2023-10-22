@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class RegisterPacients extends StatefulWidget {
-  const RegisterPacients({super.key, Key? key});
+  const RegisterPacients({super.key});
 
   @override
   State<RegisterPacients> createState() => _RegisterPacientsState();
