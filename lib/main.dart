@@ -35,7 +35,7 @@ final GoRouter _router = GoRouter(
         GoRoute(
           path: 'pacientes',
           builder: (BuildContext context, GoRouterState state) {
-            return const PacientePage();
+            return const PacientePage(pacientes: [],);
           },
         ),
         GoRoute(

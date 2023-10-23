@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/pages/registerPacients_page.dart';
 import 'package:go_router/go_router.dart';
-import 'navegation_page.dart';
+import '../widgets/navegation_widget.dart';
+import '../widgets/pacientes_widget.dart';
 
 class PacientePage extends StatefulWidget {
-  const PacientePage({Key? key}) : super(key: key);
+  final List<Pacientes> pacientes;
+
+  const PacientePage({Key? key, required this.pacientes}) : super(key: key);
 
   @override
-  State<PacientePage> createState() => _PacientePageState();
+  State<PacientePage> createState() {
+    return _PacientePageState();
+  }
 }
 
 class _PacientePageState extends State<PacientePage> {
@@ -22,20 +28,12 @@ class _PacientePageState extends State<PacientePage> {
             color: Colors.green,
             onPressed: () {
               // Navigate to the page to add new patients
-              context.go('/registerPacients');
+              context.go('/registerPacientsPage');
             },
           ),
         ],
       ),
-      body: ListView(
-        children: const <Widget>[
-          ListTile(
-            leading: Icon(Icons.account_circle),
-            title: Text('Nome do paciente'),
-            subtitle: Text('dd/mm'),
-          ),
-        ],
-      ),
+      body: PacientesListWidget(pacientes: widget.pacientes),
       bottomNavigationBar: const NavigacaoBar(),
     );
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'navegation_page.dart';
+import '../widgets/navegation_widget.dart';
 
 class ExerciciosPage extends StatefulWidget {
   const ExerciciosPage({super.key});

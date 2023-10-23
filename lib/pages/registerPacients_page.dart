@@ -2,13 +2,44 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class RegisterPacients extends StatefulWidget {
-  const RegisterPacients({super.key});
+  const RegisterPacients({Key? key}) : super(key: key);
 
   @override
   State<RegisterPacients> createState() => _RegisterPacientsState();
 }
 
+class Pacientes {
+  String nome;
+  String email;
+  String nascimento;
+
+  Pacientes({required this.nome, required this.email, required this.nascimento});
+}
+
 class _RegisterPacientsState extends State<RegisterPacients> {
+  final TextEditingController _nomeController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _nascimentoController = TextEditingController();
+
+  // Lista para armazenar os pacientes
+  List<Pacientes> pacientes = [];
+
+  void _register() {
+    if (_nomeController.text.isNotEmpty &&
+        _emailController.text.isNotEmpty &&
+        _nascimentoController.text.isNotEmpty) {
+      // Declaração do paciente no escopo da classe
+      Pacientes paciente = Pacientes(
+        nome: _nomeController.text,
+        email: _emailController.text,
+        nascimento: _nascimentoController.text,
+      );
+
+      // Adiciona o paciente à lista
+      pacientes.add(paciente);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +50,7 @@ class _RegisterPacientsState extends State<RegisterPacients> {
             Row(
               children: [
                 IconButton(
-                  onPressed: () => context.go('/'),
+                  onPressed: () => context.go('/home'),
                   icon: const Icon(Icons.arrow_back),
                 )
               ],
@@ -31,61 +62,19 @@ class _RegisterPacientsState extends State<RegisterPacients> {
             Form(
               child: Column(
                 children: [
-                  TextFormField(
-                    decoration: InputDecoration(
-                      label: const Text(
-                        'Nome completo:',
-                        style: TextStyle(color: Colors.black87),
-                      ),
-                      filled: true,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      label: const Text(
-                        'Email:',
-                        style: TextStyle(color: Colors.black87),
-                      ),
-                      filled: true,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      label: const Text(
-                        'Data de Nascimento:',
-                        style: TextStyle(color: Colors.black87),
-                      ),
-                      filled: true,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    onTap: () async {
-                      // Open date picker and handle the selected date
-                      DateTime? selectedDate = await showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(1900),
-                        lastDate: DateTime.now(),
-                      );
-                      if (selectedDate != null) {
-                        // Handle the selected date
-                      }
-                    },
-                  ),
-                  const SizedBox(height: 24),
+                  // ... (código existente)
+
                   SizedBox(
                     width: double.maxFinite,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          _register();
+                          _nomeController.clear();
+                          _emailController.clear();
+                          _nascimentoController.clear();
+                        });
+                      },
                       style: ElevatedButton.styleFrom(),
                       child: const Text('Cadastrar'),
                     ),
