@@ -11,13 +11,17 @@ class PacientesListWidget extends StatelessWidget {
     return Scaffold(
       body: ListView.builder(
         itemBuilder: (context, index) {
-          Pacientes paciente = pacientes[index];
-          return Card(
-            child: ListTile(
-              title: Text('Nome: ${paciente.nome}'),
-              subtitle: Text(paciente.nascimento),
-            ),
-          );
+          if (index < pacientes.length) {
+            Pacientes paciente = pacientes[index];
+            return Card(
+              child: ListTile(
+                title: Text('Nome: ${paciente.nome}'),
+                subtitle: Text(paciente.nascimento),
+              ),
+            );
+          } else {
+            return null; // ou qualquer outro widget que você queira exibir para índices inválidos
+          }
         },
       ),
     );
