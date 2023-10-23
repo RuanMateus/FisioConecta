@@ -28,7 +28,7 @@ class _PacientePageState extends State<PacientePage> {
             color: Colors.green,
             onPressed: () {
               // Navigate to the page to add new patients
-              context.go('/registerPacientsPage');
+              context.go('/registerPacients');
             },
           ),
         ],
