@@ -13,7 +13,8 @@ class Pacientes {
   String email;
   String nascimento;
 
-  Pacientes({required this.nome, required this.email, required this.nascimento});
+  Pacientes(
+      {required this.nome, required this.email, required this.nascimento});
 }
 
 class _RegisterPacientsState extends State<RegisterPacients> {
@@ -62,8 +63,24 @@ class _RegisterPacientsState extends State<RegisterPacients> {
             Form(
               child: Column(
                 children: [
-                  // ... (código existente)
-
+                  TextFormField(
+                      controller: _nomeController,
+                      decoration: const InputDecoration(
+                          label: Text(
+                        'Nome completo:',
+                      ))),
+                  TextFormField(
+                      controller: _emailController,
+                      decoration: const InputDecoration(
+                          label: Text(
+                        'Email:',
+                      ))),
+                  TextFormField(
+                      controller: _nascimentoController,
+                      decoration: const InputDecoration(
+                          label: Text(
+                        'Data de Nascimento:',
+                      ))),
                   SizedBox(
                     width: double.maxFinite,
                     child: ElevatedButton(
