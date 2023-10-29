@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application/pages/registerPacients_page.dart';
 import 'package:go_router/go_router.dart';
 import '../widgets/navegation_widget.dart';
-import '../widgets/pacientes_widget.dart';
 
 class PacientePage extends StatefulWidget {
   final List<Pacientes> pacientes;
@@ -33,7 +32,12 @@ class _PacientePageState extends State<PacientePage> {
           ),
         ],
       ),
-      body: PacientesListWidget(pacientes: widget.pacientes),
+      body: ListView.builder(
+        itemCount: widget.pacientes.length,
+        itemBuilder: (context, index) {
+          return PacienteCard(paciente: widget.pacientes[index]);
+        },
+      ),
       bottomNavigationBar: const NavigacaoBar(),
     );
   }

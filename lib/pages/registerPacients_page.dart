@@ -17,15 +17,31 @@ class Pacientes {
       {required this.nome, required this.email, required this.nascimento});
 }
 
+class PacienteCard extends StatelessWidget {
+  final Pacientes paciente;
+
+  const PacienteCard({Key? key, required this.paciente}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: ListTile(
+        title: Text('Nome: ${paciente.nome}'),
+        subtitle: Text('Data de Nascimento: ${paciente.nascimento}'),
+      ),
+    );
+  }
+}
+
 class _RegisterPacientsState extends State<RegisterPacients> {
   final TextEditingController _nomeController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _nascimentoController = TextEditingController();
 
   // Lista para armazenar os pacientes
-  List<Pacientes> pacientes = [];
+  List<Pacientes> lista = [];
 
-  void _register() {
+  register() {
     if (_nomeController.text.isNotEmpty &&
         _emailController.text.isNotEmpty &&
         _nascimentoController.text.isNotEmpty) {
@@ -37,7 +53,7 @@ class _RegisterPacientsState extends State<RegisterPacients> {
       );
 
       // Adiciona o paciente à lista
-      pacientes.add(paciente);
+      lista.add(paciente);
     }
   }
 
@@ -65,28 +81,21 @@ class _RegisterPacientsState extends State<RegisterPacients> {
                 children: [
                   TextFormField(
                       controller: _nomeController,
-                      decoration: const InputDecoration(
-                          label: Text(
-                        'Nome completo:',
-                      ))),
+                      decoration:
+                          const InputDecoration(labelText: 'Nome completo:')),
                   TextFormField(
                       controller: _emailController,
-                      decoration: const InputDecoration(
-                          label: Text(
-                        'Email:',
-                      ))),
+                      decoration: const InputDecoration(labelText: 'Email:')),
                   TextFormField(
                       controller: _nascimentoController,
                       decoration: const InputDecoration(
-                          label: Text(
-                        'Data de Nascimento:',
-                      ))),
+                          labelText: 'Data de Nascimento:')),
                   SizedBox(
                     width: double.maxFinite,
                     child: ElevatedButton(
                       onPressed: () {
                         setState(() {
-                          _register();
+                          register();
                           _nomeController.clear();
                           _emailController.clear();
                           _nascimentoController.clear();
@@ -97,6 +106,14 @@ class _RegisterPacientsState extends State<RegisterPacients> {
                     ),
                   ),
                 ],
+              ),
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: lista.length,
+                itemBuilder: (context, index) {
+                  return PacienteCard(paciente: lista[index]);
+                },
               ),
             ),
           ],
