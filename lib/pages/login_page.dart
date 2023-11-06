@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 import '../assets/colors/colors.dart';
 
@@ -9,7 +11,40 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
+final reference = FirebaseFirestore.instance.doc(
+  'userProfile/${FirebaseAuth.instance.currentUser!.uid}',
+);
+
 class _LoginPageState extends State<LoginPage> {
+  final formKey = GlobalKey<FormState>();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  Future<void> login() async {
+    final fireAuth = FirebaseAuth.instance;
+    final email = emailController.text.trim();
+    final password = passwordController.text;
+
+    try {
+      await fireAuth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      emailController.clear();
+      passwordController.clear();
+    } catch (e) {
+      const SnackBar(
+        content: Text(
+          'Verifique suas credenciais ou crie uma conta.',
+        ),
+      );
+    }
+  }
+
+  void goToHome() {
+    context.go('/homePage');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,16 +94,24 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               Form(
+                key: formKey,
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 0, horizontal: 24),
                   child: Column(
                     children: [
                       TextFormField(
+                        controller: emailController,
                         textInputAction: TextInputAction.next,
                         style: const TextStyle(
                           color: AppFisioColors.blackApp,
                         ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Este campo é obrigatório.';
+                          }
+                          return null;
+                        },
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: AppFisioColors.whiteApp,
@@ -94,6 +137,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       const SizedBox(height: 24),
                       TextFormField(
+                        controller: passwordController,
                         textInputAction: TextInputAction.next,
                         style: const TextStyle(
                           color: AppFisioColors.blackApp,
@@ -133,7 +177,11 @@ class _LoginPageState extends State<LoginPage> {
                         width: double.maxFinite,
                         height: 52,
                         child: ElevatedButton(
-                          onPressed: () => context.go('/home'),
+                          onPressed: () {
+                            if (formKey.currentState!.validate()) {
+                              context.go('/home');
+                            }
+                          },
                           style: ElevatedButton.styleFrom(
                               backgroundColor: AppFisioColors.greenApp,
                               elevation: 3,

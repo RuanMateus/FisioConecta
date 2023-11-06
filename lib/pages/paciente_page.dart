@@ -15,6 +15,8 @@ class PacientePage extends StatefulWidget {
 }
 
 class _PacientePageState extends State<PacientePage> {
+  get length => widget.pacientes.length;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
